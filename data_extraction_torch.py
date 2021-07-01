@@ -21,16 +21,16 @@ def train_dataset(img_root, label_root):
         img = os.path.join(img_root, "t%.3d.tif" % i)
         label = os.path.join(label_root, "man_seg%.3d.tif" % i)
         imgs.append((img, label))
-        print(img, label)
+        # print(img, label)
     return imgs
 
 
 def test_dataset(img_root):
     imgs = []
-    n = len(os.listdir(img_root))
+    n = len(os.listdir(img_root))-1
     for i in range(n):
         img = os.path.join(img_root, "t%.3d.tif" % i)
-        imgs.append(img)
+        imgs.append((img))
     return imgs
 
 
@@ -105,15 +105,15 @@ def data_extraction_torch():
     print(f"Mask mode: {sample_mask.mode} (16-bit unsigned integer pixels)")
     print()
 
-    sample_image = train_data + 'images/t000.tif'
-    image = imread(sample_image)    # read the image using skimage
-    plt.imshow(image)
-    plt.waitforbuttonpress()
-
-    sample_mask = train_data + 'masks/SEG/man_seg000.tif'
-    mask = imread(sample_mask)
-    plt.imshow(mask)
-    plt.waitforbuttonpress()
+    # sample_image = train_data + 'images/t000.tif'
+    # image = imread(sample_image)    # read the image using skimage
+    # plt.imshow(image)
+    # plt.waitforbuttonpress()
+    #
+    # sample_mask = train_data + 'masks/SEG/man_seg000.tif'
+    # mask = imread(sample_mask)
+    # plt.imshow(mask)
+    # plt.waitforbuttonpress()
 
     print("... Data extracted")
 
@@ -132,14 +132,13 @@ def data_extraction_torch():
     print(f"Feature batch shape: {train_features.size()}")
     print(f"Labels batch shape: {train_labels.size()}")
     img = train_features[0].squeeze()
-
     label = train_labels[0].squeeze()
 
-    plt.imshow(img)
-    plt.waitforbuttonpress()
-
-    plt.imshow(label)
-    plt.waitforbuttonpress()
+    # plt.imshow(img)
+    # plt.waitforbuttonpress()
+    #
+    # plt.imshow(label)
+    # plt.waitforbuttonpress()
 
     plt.show()
     print(f"Label: {label}")
